@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import marked from 'marked'
+import _ from 'lodash'
 
 import React from 'react'
 import { render } from 'react-dom'
@@ -8,7 +9,7 @@ class CommentBox extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			data: []
+			data: this.loadCommentsFromServer()
 		}
 	}
 
@@ -18,6 +19,7 @@ class CommentBox extends React.Component {
 			dataType: 'json',
 			cache: false,
 			success: function(data) {
+				console.log(data)
 				this.setState({data: data})
 			}.bind(this),
 			error: function(xhr, status, err) {
@@ -28,7 +30,7 @@ class CommentBox extends React.Component {
 
 	componenetDidMount() {
 		this.loadCommentsFromServer()
-		setInterval(this.loadCommentsFromServer, this.props.pollInterval)
+		setInterval(this.loadCommentsFromServer(), this.props.pollInterval)
 	}
 
 	render() {
@@ -87,8 +89,7 @@ class CommentForm extends React.Component {
 		)
 	}
 }
-
 render(
-	<CommentBox url="/api/comments.json" pollInterval={2000} />,
+	<CommentBox url="api/comments.json" pollInterval={2000} />,
 	document.getElementById('content')
 )
