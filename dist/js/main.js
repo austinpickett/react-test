@@ -30555,16 +30555,8 @@ var CommentBox = function (_React$Component) {
 	}, {
 		key: 'handleCommentSubmit',
 		value: function handleCommentSubmit(comment) {
-			_jquery2.default.ajax({
-				url: this.props.url,
-				dataType: 'json',
-				type: 'POST',
-				data: comment,
-
-				success: function (data) {
-					this.setState({ data: data });
-				}.bind(this)
-			});
+			var newData = this.state.data;
+			this.setState({ data: newData.push(comment) });
 		}
 	}, {
 		key: 'render',
@@ -30604,6 +30596,7 @@ var CommentList = function (_React$Component2) {
 	_createClass(CommentList, [{
 		key: 'render',
 		value: function render() {
+			console.log(this.props);
 			return _react2.default.createElement(
 				'div',
 				{ className: 'commentList' },
@@ -30692,7 +30685,7 @@ var CommentForm = function (_React$Component4) {
 		value: function render() {
 			return _react2.default.createElement(
 				'form',
-				{ className: 'commentForm' },
+				{ 'class': 'commentForm', method: 'post', action: 'javascript:;', onSubmit: this.handleSubmit.bind(this) },
 				_react2.default.createElement('input', {
 					type: 'text', placeholder: 'Name',
 					value: this.state.author,

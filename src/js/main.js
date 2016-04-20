@@ -28,16 +28,8 @@ class CommentBox extends React.Component {
 		})
 	}
 	handleCommentSubmit(comment) {
-		$.ajax({
-			url: this.props.url,
-			dataType: 'json',
-			type: 'POST',
-			data: comment,
-
-			success: function(data) {
-				this.setState({data: data})
-			}.bind(this)
-		})
+		let newData = this.state.data
+		this.setState({data: newData.push(comment)})
 	}
 	render() {
 		if (this.state.data.length === 0)
@@ -55,14 +47,15 @@ class CommentBox extends React.Component {
 
 class CommentList extends React.Component {
 	render() {
+		console.log(this.props)
 		return (
-		<div className="commentList">
-		{this.props.data.map(function(comment) {
-			return <Comment 
-				key={Math.random()} 
-				author={comment.author}>{comment.text}</Comment>
-		})}
-		</div>
+			<div className="commentList">
+			{this.props.data.map(function(comment) {
+				return <Comment 
+					key={Math.random()} 
+					author={comment.author}>{comment.text}</Comment>
+			})}
+			</div>
 		)
 	}
 }
@@ -108,7 +101,7 @@ class CommentForm extends React.Component {
 
 	render() {
 		return (
-		<form className="commentForm">
+		<form class="commentForm" method="post" action="javascript:;" onSubmit={this.handleSubmit.bind(this)}>
 			<input
 				type="text" placeholder="Name" 
 				value={this.state.author}
