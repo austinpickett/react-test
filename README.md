@@ -7,4 +7,4 @@
 * gulp
 
 # Description
-react-test is the react tutorial (https://facebook.github.io/react/docs/tutorial.html) using ES6.
+react-test is the react tutorial (https://facebook.github.io/react/docs/tutorial.html) using ES6. This is just a simple comment application
