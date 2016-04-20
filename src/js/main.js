@@ -7,7 +7,6 @@ import { render } from 'react-dom'
 class CommentBox extends React.Component {
 	constructor(props) {
 		super(props)
-
 		this.state = { data: [] }
 	}
 
@@ -38,7 +37,7 @@ class CommentBox extends React.Component {
 		return (
 			<div className="commentBox">
 				<h1>Comments</h1>
-				<CommentList data={this.state.data} />
+				<CommentList {...this.state} />
 				<CommentForm onCommentSubmit={this.handleCommentSubmit.bind(this)} />
 			</div>
 		)
@@ -47,10 +46,12 @@ class CommentBox extends React.Component {
 
 class CommentList extends React.Component {
 	render() {
-		console.log(this.props)
+		if(this.state === null)
+			return <p>No comments</p>
+
 		return (
 			<div className="commentList">
-			{this.props.data.map(function(comment) {
+			{this.state.data.map(function(comment) {
 				return <Comment 
 					key={Math.random()} 
 					author={comment.author}>{comment.text}</Comment>

@@ -30575,7 +30575,7 @@ var CommentBox = function (_React$Component) {
 					null,
 					'Comments'
 				),
-				_react2.default.createElement(CommentList, { data: this.state.data }),
+				_react2.default.createElement(CommentList, this.state),
 				_react2.default.createElement(CommentForm, { onCommentSubmit: this.handleCommentSubmit.bind(this) })
 			);
 		}
@@ -30596,11 +30596,16 @@ var CommentList = function (_React$Component2) {
 	_createClass(CommentList, [{
 		key: 'render',
 		value: function render() {
-			console.log(this.props);
+			if (this.state === null) return _react2.default.createElement(
+				'p',
+				null,
+				'No comments'
+			);
+
 			return _react2.default.createElement(
 				'div',
 				{ className: 'commentList' },
-				this.props.data.map(function (comment) {
+				this.state.data.map(function (comment) {
 					return _react2.default.createElement(
 						Comment,
 						{
