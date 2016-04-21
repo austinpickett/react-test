@@ -74,15 +74,19 @@ gulp.task('sass', function() {
 		.pipe(gulp.dest('dist/css'))
 });
 
-gulp.task('js', function() {
-	buildScript(false);
-});
+// gulp.task('js', function() {
+// 	buildScript(false);
+// 	gulp.src('src/js/plugins.js')
+// 		.pipe(useref())
+// 		.pipe(gulp.dest('dist/js'));
+// });
 
 gulp.task('images', function() {});
 
 gulp.task('default', ['html', 'server'],function() {
 	buildScript(true);
 	gulp.watch(['src/index.html'], ['html']);
+	// gulp.watch(['src/js/plugins.js'], ['js']);
 	gulp.watch(['src/css/main.sass'], ['sass']);
 	gulp.watch(['src/api/comments.json'], ['json']);
 });
